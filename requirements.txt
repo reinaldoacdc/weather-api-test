@@ -13,3 +13,4 @@ testresources==2.0.1
 virtualenv==20.4.0
 virtualenv-clone==0.5.4
 Werkzeug==1.0.1
+requests==2.22.0
