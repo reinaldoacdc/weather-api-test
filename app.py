@@ -1,4 +1,5 @@
 import json
+from database import list_historic
 from forecast import Forecast
 from flask import Flask
 from flask_cors import CORS
@@ -14,4 +15,8 @@ def hello_world():
 def show_forecast(city):
     forecast = Forecast(city)
     return forecast.toJSON()
+
+@app.route('/historic')
+def show_historic():
+    return list_historic()
 
