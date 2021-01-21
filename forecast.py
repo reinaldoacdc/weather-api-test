@@ -18,7 +18,7 @@ class Forecast(object):
 
         api_key=os.environ.get('OPENWEATHER_API_KEY')
         print(api_key)
-        r = requests.get('http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}'.format(city=city, api_key=api_key))
+        r = requests.get('http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric'.format(city=city, api_key=api_key))
         lista = r.json()['list']
 
         #for date, value in groupby(lista, key = lambda x : datetime.utcfromtimestamp(x['dt']).date() ):
