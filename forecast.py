@@ -17,7 +17,6 @@ class Forecast(object):
         self.list = []
 
         api_key=os.environ.get('OPENWEATHER_API_KEY')
-        print(api_key)
         r = requests.get('http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric&lang=pt_br'.format(city=city, api_key=api_key))
         lista = r.json()['list']
 
@@ -28,7 +27,6 @@ class Forecast(object):
             lo,hi = sys.maxsize,-sys.maxsize-1
             for item in groups:
                 for x in item:
-                    print(x['main'])
                     description = x['weather'][0]['description']
                     pressure = x['main']['pressure']
                     humidity = x['main']['humidity']

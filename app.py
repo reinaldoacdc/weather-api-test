@@ -1,5 +1,6 @@
 import json
-from database import list_historic
+import datetime
+from database import list_historic, insert_historic
 from forecast import Forecast
 from flask import Flask
 from flask_cors import CORS
@@ -14,6 +15,7 @@ def hello_world():
 @app.route('/forecast/<city>')
 def show_forecast(city):
     forecast = Forecast(city)
+    insert_historic(forecast.city, datetime.date.today(), '', forecast.list[0]['temp_min'], forecast.list[0]['temp_max'])
     return forecast.toJSON()
 
 @app.route('/historic')
