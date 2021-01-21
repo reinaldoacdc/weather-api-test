@@ -13,6 +13,5 @@ def hello_world():
 @app.route('/forecast/<city>')
 def show_forecast(city):
     forecast = Forecast(city)
-    print(forecast)
     return forecast.toJSON()
 

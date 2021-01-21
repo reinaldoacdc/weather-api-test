@@ -18,7 +18,7 @@ class Forecast(object):
 
         api_key=os.environ.get('OPENWEATHER_API_KEY')
         print(api_key)
-        r = requests.get('http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric'.format(city=city, api_key=api_key))
+        r = requests.get('http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric&lang=pt_br'.format(city=city, api_key=api_key))
         lista = r.json()['list']
 
         #for date, value in groupby(lista, key = lambda x : datetime.utcfromtimestamp(x['dt']).date() ):
@@ -28,19 +28,14 @@ class Forecast(object):
             lo,hi = sys.maxsize,-sys.maxsize-1
             for item in groups:
                 for x in item:
+                    print(x['main'])
+                    description = x['weather'][0]['description']
+                    pressure = x['main']['pressure']
+                    humidity = x['main']['humidity']
                     lo = min(x['main']['temp_min'], lo)
                     hi = max(x['main']['temp_max'], hi)
  
-
-            #print(type(value))
-            #minmin = min(value, key=lambda x: x['main']['temp_min'])
-            #list_temp_min = sort_and_group(value, key=lambda x: x['main']['temp_min']) 
-            #print('*****')
-            #print(type(minmin))
-            ##temp_min = (min(x) for _, x in list_temp_min)
-            #sorted_by_temp = sorted(temp_min, key=lambda x: x['main']['temp_min'])
-            #minmin = min(islice(grouper(sorted_by_temp, 1), 1))
-            self.list.append( {'date' : date.strftime('%d/%m/%Y'), 'temp_min' : lo, 'temp_max' : hi} )
+            self.list.append( {'date' : date.strftime('%d/%m/%Y'), 'temp_min' : lo, 'temp_max' : hi, 'description' : description, 'pressure' : pressure, 'humidity' : humidity  } )
 
 
 
